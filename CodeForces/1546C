@@ -1,0 +1,80 @@
+/*
+*	zelawat
+*/
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+
+void solve();
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	ll t;
+	cin>>t;
+	// t = 1;
+	while(t--)
+	{
+		solve();
+	}
+	return 0;
+}
+
+void solve()
+{
+	ll n;
+	cin>>n;
+	ll a[n],b[n];
+	map<ll,vector<ll>> m;
+	map<ll,vector<ll>> check;
+	for(ll i = 0;i<n;i++)
+	{
+		cin>>a[i];
+		b[i] = a[i];
+		if(m[a[i]].size() == 0)
+		{
+			m[a[i]].push_back(0);
+			m[a[i]].push_back(0);
+		}
+		if(i%2 == 0)
+		{
+			m[a[i]][0]++;
+		}
+		else
+		{
+			m[a[i]][1]++;	
+		}
+	}
+	sort(b,b+n);
+	for(ll i = 0;i<n;i++)
+	{
+		if(check[b[i]].size() == 0)
+		{
+			check[b[i]].push_back(0);
+			check[b[i]].push_back(0);
+		}
+		if(i%2 == 0)
+		{
+			check[b[i]][0]++;
+		}
+		else
+		{
+			check[b[i]][1]++;	
+		}
+	}
+	bool cc = true;
+	for(auto i : m)
+	{
+		if(check[i.first][0] != i.second[0] || check[i.first][1] != i.second[1])
+		{
+			cout<<"NO\n";
+			return;
+		}
+	}
+	cout<<"YES\n";
+}
